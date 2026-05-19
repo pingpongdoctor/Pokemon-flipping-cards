@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- import jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="module" src="index.js"></script>
+</head>
+
+<body class="2xl:max-w-[1280px] dark:bg-black">
+  <header>
+    <div class="flex gap-4 mb-12">
+      <div class="relative inline-flex group">
+        <div class="absolute transitiona-all duration-1000 opacity-70 -inset-px animate-tilt">
+        </div>
+        <button id="darkmodeBtn"
+          class="border-1 relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none">Dark
+          mode
+        </button>
+      </div>
+
+      <div class="relative inline-flex group">
+        <div class="absolute transitiona-all duration-1000 opacity-70 -inset-px color_theme_btn_bg animate-tilt">
+        </div>
+        <button id="lightmodeBtn"
+          class="border-1 relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none">Light
+          mode
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto pb-8">
+      <dl
+        class="rounded-lg bg-white shadow-xl/50 shadow-gray-500 sm:grid sm:grid-cols-5 dark:border-orange-500 dark:border-4">
+        <div
+          class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r dark:border-orange-500 dark:border-r-4">
+          <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
+            Clicks
+          </dt>
+          <dd id="clickNum" class="order-1 text-5xl font-extrabold text-gray-700"></dd>
+        </div>
+        <div
+          class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r dark:border-orange-500 dark:border-r-4">
+          <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
+            Total pairs
+          </dt>
+          <dd id="total" class="order-1 text-5xl font-extrabold text-gray-700"></dd>
+        </div>
+        <div
+          class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r dark:border-orange-500 dark:border-r-4">
+          <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
+            Matches
+          </dt>
+          <dd id="matches" class="order-1 text-5xl font-extrabold text-gray-700"></dd>
+        </div>
+
+        <div
+          class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l dark:border-orange-500 dark:border-r-4">
+          <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
+            Unmatches
+          </dt>
+          <dd id="unmatches" class="order-1 text-5xl font-extrabold text-gray-700"></dd>
+        </div>
+        <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
+          <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
+            Timer (seconds)
+          </dt>
+          <dd id="timer" class="order-1 text-5xl font-extrabold text-gray-700"></dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <main>
+    <form id="difficulty_form" class="flex items-center justify-center">
+      <div class="grid grid-cols-3 gap-2 w-full max-w-screen-sm mb-8">
+        <div class="bg-white rounded-md border-2 border-gray-500 dark:border-4 dark:border-yellow-500">
+          <input class="hidden" id="easy" type="radio" name="difficulty" value="easy">
+          <label class="flex flex-col p-4 cursor-pointer check" for="easy">
+            <span class="text-xs font-semibold uppercase">Easy</span>
+            <span class="text-xl font-bold mt-2">12 cards</span>
+            <span class="text-xl font-bold mt-2">240 seconds</span>
+          </label>
+        </div>
+        <div class="bg-white rounded-md border-2 border-gray-500 dark:border-4 dark:border-yellow-500">
+          <input class="hidden" id="normal" type="radio" name="difficulty" value="normal">
+          <label class="flex flex-col p-4 cursor-pointer" for="normal">
+            <span class="text-xs font-semibold uppercase">Normal</span>
+            <span class="text-xl font-bold mt-2">24 cards</span>
+            <span class="text-xl font-bold mt-2">120 seconds</span>
+          </label>
+        </div>
+        <div class="bg-white rounded-md border-2 border-gray-500 dark:border-4 dark:border-yellow-500">
+          <input class="hidden" id="hard" type="radio" name="difficulty" value="hard">
+          <label class="flex flex-col p-4 cursor-pointer" for="hard">
+            <span class="text-xs font-semibold uppercase">Hard</span>
+            <span class="text-xl font-bold mt-2">48 cards</span>
+            <span class="text-xl font-bold mt-2">60 seconds</span>
+          </label>
+        </div>
+      </div>
+    </form>
+
+    <div class="flex justify-center gap-4 mb-8">
+      <button id="start"
+        class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+        <span class="absolute inset-0 w-full h-full btn"></span>
+        <span
+          class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span class="relative text-white">Start</span>
+      </button>
+
+      <button disabled id="reset"
+        class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+        <span class="absolute inset-0 w-full h-full disable_btn"></span>
+        <span
+          class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span class="relative text-white">Reset</span>
+      </button>
+
+      <button id="power"
+        class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+        <span class="absolute inset-0 w-full h-full btn"></span>
+        <span
+          class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+        <span class="relative text-white">Power up</span>
+      </button>
+    </div>
+
+    <div id="game_grid" class="flex flex-wrap justify-center w-full perspective-[1000px] gap-2"></div>
+  </main>
+</body>
+
+</html>
