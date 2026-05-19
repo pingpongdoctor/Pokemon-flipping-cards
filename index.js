@@ -1,3 +1,5 @@
+import backImg from "./back.webp"
+
 const clickNum = document.getElementById("clickNum");
 const matches = document.getElementById("matches");
 const unmatches = document.getElementById("unmatches");
@@ -10,6 +12,7 @@ const difficultyForm = document.getElementById("difficulty_form");
 const darkmodeBtn = document.getElementById("darkmodeBtn");
 const lightmodeBtn = document.getElementById("lightmodeBtn");
 const total = document.getElementById("total");
+
 let firstCard = null;
 let secondCard = null;
 
@@ -60,7 +63,7 @@ async function renderCards(cardNum) {
   double.sort(() => { return Math.random() - 0.5 }).forEach((pokemon, idx) => {
     const card = `<div class="card border-1 shadow-sm/50 bg-gray-100 rounded-md w-[200px] h-[200px] relative transition-transform duration-1000 transform-3d">
       <img id="img${idx}" class="front_face" src="${pokemon.url}" alt="${pokemon.name}">
-      <img class="back_face" src="./back.webp" alt="back-img">
+      <img class="back_face" src=${backImg} alt="back-img">
     </div>`
 
     container.insertAdjacentHTML("beforeend", card);
