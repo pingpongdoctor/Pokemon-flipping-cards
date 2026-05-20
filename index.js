@@ -163,6 +163,7 @@ function resetUI() {
   total.textContent = 0;
   unmatches.textContent = 0;
   matches.textContent = 0;
+  clickNum.textContent = 0;
 }
 
 difficultyForm.addEventListener("change", (e) => {
